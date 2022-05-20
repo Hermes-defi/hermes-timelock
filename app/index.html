@@ -24,10 +24,10 @@
 
 <fieldset>
     <legend>add</legend>
-    timestamp: <input type="text" id="add_timestamp" value=""/>
-    lp addr: <input value="0x78B3Ec25D285F7a9EcA8Da8eb6b20Be4d5D70E84" type="text" id="lp" size="30"/>
-    points: <input value="100" type="number" id="alloc" style="width: 100px"/>
-    rewarder: <input value="0x78B3Ec25D285F7a9EcA8Da8eb6b20Be4d5D70E84" type="text" id="rewarder" size="30"/>
+    timestamp: <input type="text" id="add_timestamp" class="timestamp" value=""/>
+    lp addr: <input value="" type="text" id="lp" size="30"/>
+    points: <input value="" type="number" id="alloc" style="width: 100px"/>
+    rewarder: <input value="" type="text" id="rewarder" size="30"/>
 
     <br/>
     <input type="button" value="Ok" onclick="add_lp()"/>
@@ -38,6 +38,39 @@
     <br/>
     run:<br/>
     <textarea cols="100" type="text" id="add_out_run"></textarea>
+</fieldset>
+
+<fieldset>
+    <legend>set</legend>
+    timestamp: <input type="text" id="set_timestamp" class="timestamp" value=""/>
+    pid: <input value="" type="number" id="set_pid" style="width: 50px"/>
+    points: <input value="" type="number" id="set_alloc" style="width: 50px"/>
+    rewarder: <input value="0x0000000000000000000000000000000000000000" type="text" id="set_rewarder" size="30"/>
+    overwrite? <input type="checkbox" id="set_overwrite"/>
+    <br/>
+    <input type="button" value="Ok" onclick="set_lp()"/>
+
+    <hr/>
+    queue:<br/>
+    <textarea cols="100" type="text" id="set_out_queue"></textarea>
+    <br/>
+    run:<br/>
+    <textarea cols="100" type="text" id="set_out_run"></textarea>
+</fieldset>
+
+<fieldset>
+    <legend>updateEmissionRate</legend>
+    timestamp: <input type="text" id="updateEmissionRate_timestamp" class="timestamp" value=""/>
+    hermesPerSec (in decimal): <input value="" type="text" id="hermesPerSec" />
+    <br/>
+    <input type="button" value="Ok" onclick="updateEmissionRate()"/>
+
+    <hr/>
+    queue:<br/>
+    <textarea cols="100" type="text" id="updateEmissionRate_out_queue"></textarea>
+    <br/>
+    run:<br/>
+    <textarea cols="100" type="text" id="updateEmissionRate_out_run"></textarea>
 </fieldset>
 
 </body>

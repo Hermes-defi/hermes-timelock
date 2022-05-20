@@ -511,7 +511,7 @@ async function load(provider) {
         timelock = new web3.eth.Contract(abi,'0x3d9f5f87ef9abe7e0c985c48e66f3e3b863450e2');
 
         const ts = get_interval(12);
-        $('#add_timestamp').val(ts);
+        $('.timestamp').val(ts);
 
     } else {
         alert('no web3 connection');
@@ -542,4 +542,41 @@ async function add_lp(){
 
     $('#add_out_queue').val( queue.encodeABI() );
     $('#add_out_run').val( run.encodeABI() );
+}
+
+async function set_lp(){
+    const master = $('#master').val();
+
+    const eta = $('#set_timestamp').val();
+    const pid = $('#set_pid').val();
+    const points = $('#set_alloc').val();
+    const rewarder = $('#set_rewarder').val();
+    const overwrite = $('#set_overwrite').is(":checked");
+
+    const signature = 'set(uint256,uint256,address,bool)';
+    const params = [pid, points, rewarder, overwrite];
+    const data = encodeParameters(['uint256', 'uint256', 'address', 'bool'], params);
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#set_out_queue').val( queue.encodeABI() );
+    $('#set_out_run').val( run.encodeABI() );
+}
+
+async function updateEmissionRate(){
+    const master = $('#master').val();
+
+    const eta = $('#updateEmissionRate_timestamp').val();
+    const hermesPerSec = web3.utils.toWei($('#hermesPerSec').val(),'gwei');
+    console.log('hermesPerSec', hermesPerSec);
+    const signature = 'updateEmissionRate(uint256)';
+    const params = [hermesPerSec];
+    const data = encodeParameters(['uint256'], params);
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#updateEmissionRate_out_queue').val( queue.encodeABI() );
+    $('#updateEmissionRate_out_run').val( run.encodeABI() );
 }
