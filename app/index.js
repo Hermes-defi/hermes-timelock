@@ -645,8 +645,75 @@ async function setDevPercent(){
     $('#setDevPercent_out_run').val( run.encodeABI() );
 }
 
-// setDevFeeStage(uint256[] memory _devFees)
-// setUserFeeStage(uint256[] memory _userFees)
-// setStageEnds(uint256[] memory _blockEnds)
-// setStageStarts(uint256[] memory _blockStarts)
-// (uint256 _newDevPercent)
+async function setDevFeeStage(){
+    const master = $('#master').val();
+
+    const eta = $('#timestamp').val();
+    const setDevFeeStage1 = $('#setDevFeeStage1').val();
+    const setDevFeeStage2 = $('#setDevFeeStage2').val();
+    const setDevFeeStage3 = $('#setDevFeeStage3').val();
+    const signature = 'setDevFeeStage(uint256[])';
+    const params = [[setDevFeeStage1,setDevFeeStage2,setDevFeeStage3]];
+    const data = encodeParameters(['uint256[]'], params);
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#setDevFeeStage_out_queue').val( queue.encodeABI() );
+    $('#setDevFeeStage_out_run').val( run.encodeABI() );
+}
+
+async function setUserFeeStage(){
+    const master = $('#master').val();
+
+    const eta = $('#timestamp').val();
+    const setUserFeeStage1 = $('#setUserFeeStage1').val();
+    const setUserFeeStage2 = $('#setUserFeeStage2').val();
+    const setUserFeeStage3 = $('#setUserFeeStage3').val();
+    const signature = 'setUserFeeStage(uint256[])';
+    const params = [[setUserFeeStage1,setUserFeeStage2,setUserFeeStage3]];
+    const data = encodeParameters(['uint256[]'], params);
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#setUserFeeStage_out_queue').val( queue.encodeABI() );
+    $('#setUserFeeStage_out_run').val( run.encodeABI() );
+}
+
+async function setStageEnds(){
+    const master = $('#master').val();
+
+    const eta = $('#timestamp').val();
+    const a1 = $('#setStageEnds1').val();
+    const b2 = $('#setStageEnds2').val();
+    const c3 = $('#setStageEnds3').val();
+    const signature = 'setStageEnds(uint256[])';
+    const params = [[a1,b2,c3]];
+    const data = encodeParameters(['uint256[]'], params);
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#setUserFeeStage_out_queue').val( queue.encodeABI() );
+    $('#setUserFeeStage_out_run').val( run.encodeABI() );
+}
+
+async function setStageStarts(){
+    const master = $('#master').val();
+
+    const eta = $('#timestamp').val();
+    const a1 = $('#setStageStarts1').val();
+    const b2 = $('#setStageStarts2').val();
+    const c3 = $('#setStageStarts3').val();
+    const signature = 'setStageStarts(uint256[])';
+    const params = [[a1,b2,c3]];
+    const data = encodeParameters(['uint256[]'], params);
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#setStageStarts_out_queue').val( queue.encodeABI() );
+    $('#setStageStarts_out_run').val( run.encodeABI() );
+}
+
