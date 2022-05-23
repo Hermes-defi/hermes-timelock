@@ -21,13 +21,13 @@
 
 <span id="WALLET"></span>
 - masterchef: <input type="text" id="master" value="0x78B3Ec25D285F7a9EcA8Da8eb6b20Be4d5D70E84"/>
+timestamp: <input type="text" id="timestamp" class="timestamp" value=""/>
 
 <fieldset>
     <legend>add</legend>
-    timestamp: <input type="text" id="add_timestamp" class="timestamp" value=""/>
     lp addr: <input value="" type="text" id="lp" size="30"/>
     points: <input value="" type="number" id="alloc" style="width: 100px"/>
-    rewarder: <input value="" type="text" id="rewarder" size="30"/>
+    rewarder: <input value="0x0000000000000000000000000000000000000000" type="text" id="rewarder" size="30"/>
 
     <br/>
     <input type="button" value="Ok" onclick="add_lp()"/>
@@ -42,7 +42,6 @@
 
 <fieldset>
     <legend>set</legend>
-    timestamp: <input type="text" id="set_timestamp" class="timestamp" value=""/>
     pid: <input value="" type="number" id="set_pid" style="width: 50px"/>
     points: <input value="" type="number" id="set_alloc" style="width: 50px"/>
     rewarder: <input value="0x0000000000000000000000000000000000000000" type="text" id="set_rewarder" size="30"/>
@@ -71,6 +70,66 @@
     <br/>
     run:<br/>
     <textarea cols="100" type="text" id="updateEmissionRate_out_run"></textarea>
+</fieldset>
+
+<fieldset>
+    <legend>setInvestorPercent</legend>
+
+    setInvestorPercent: <input value="" type="text" id="setInvestorPercent" />
+    <br/>
+    <input type="button" value="Ok" onclick="setInvestorPercent()"/>
+
+    <hr/>
+    queue:<br/>
+    <textarea cols="100" type="text" id="setInvestorPercent_out_queue"></textarea>
+    <br/>
+    run:<br/>
+    <textarea cols="100" type="text" id="setInvestorPercent_out_run"></textarea>
+</fieldset>
+
+<fieldset>
+    <legend>setInvestorAddr</legend>
+
+    _investorAddr: <input value="" type="text" id="setInvestorAddr" />
+    <br/>
+    <input type="button" value="Ok" onclick="setInvestorAddr()"/>
+
+    <hr/>
+    queue:<br/>
+    <textarea cols="100" type="text" id="setInvestorAddr_out_queue"></textarea>
+    <br/>
+    run:<br/>
+    <textarea cols="100" type="text" id="setInvestorAddr_out_run"></textarea>
+</fieldset>
+
+<fieldset>
+    <legend>setTreasuryPercent</legend>
+
+    %: <input value="" type="text" id="setTreasuryPercent" />
+    <br/>
+    <input type="button" value="Ok" onclick="setTreasuryPercent()"/>
+
+    <hr/>
+    queue:<br/>
+    <textarea cols="100" type="text" id="setTreasuryPercent_out_queue"></textarea>
+    <br/>
+    run:<br/>
+    <textarea cols="100" type="text" id="setTreasuryPercent_out_run"></textarea>
+</fieldset>
+
+<fieldset>
+    <legend>setDevPercent</legend>
+
+    %: <input value="" type="text" id="setDevPercent" />
+    <br/>
+    <input type="button" value="Ok" onclick="setDevPercent()"/>
+
+    <hr/>
+    queue:<br/>
+    <textarea cols="100" type="text" id="setDevPercent_out_queue"></textarea>
+    <br/>
+    run:<br/>
+    <textarea cols="100" type="text" id="setDevPercent_out_run"></textarea>
 </fieldset>
 
 </body>

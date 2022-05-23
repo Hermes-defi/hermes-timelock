@@ -547,7 +547,7 @@ async function add_lp(){
 async function set_lp(){
     const master = $('#master').val();
 
-    const eta = $('#set_timestamp').val();
+    const eta = $('#timestamp').val();
     const pid = $('#set_pid').val();
     const points = $('#set_alloc').val();
     const rewarder = $('#set_rewarder').val();
@@ -567,7 +567,7 @@ async function set_lp(){
 async function updateEmissionRate(){
     const master = $('#master').val();
 
-    const eta = $('#updateEmissionRate_timestamp').val();
+    const eta = $('#timestamp').val();
     const hermesPerSec = web3.utils.toWei($('#hermesPerSec').val(),'gwei');
     console.log('hermesPerSec', hermesPerSec);
     const signature = 'updateEmissionRate(uint256)';
@@ -580,3 +580,73 @@ async function updateEmissionRate(){
     $('#updateEmissionRate_out_queue').val( queue.encodeABI() );
     $('#updateEmissionRate_out_run').val( run.encodeABI() );
 }
+
+async function setInvestorPercent(){
+    const master = $('#master').val();
+
+    const eta = $('#timestamp').val();
+    const setInvestorPercent = $('#setInvestorPercent').val();
+    const signature = 'setInvestorPercent(uint256)';
+    const params = [setInvestorPercent];
+    const data = encodeParameters(['uint256'], params);
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#setInvestorPercent_out_queue').val( queue.encodeABI() );
+    $('#setInvestorPercent_out_run').val( run.encodeABI() );
+}
+
+async function setInvestorAddr(){
+    const master = $('#master').val();
+
+    const eta = $('#timestamp').val();
+    const setInvestorPercent = $('#setInvestorAddr').val();
+    const signature = 'setInvestorAddr(address)';
+    const params = [setInvestorPercent];
+    const data = encodeParameters(['address'], params);
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#setInvestorAddr_out_queue').val( queue.encodeABI() );
+    $('#setInvestorAddr_out_run').val( run.encodeABI() );
+}
+
+async function setTreasuryPercent(){
+    const master = $('#master').val();
+
+    const eta = $('#timestamp').val();
+    const setInvestorPercent = $('#setTreasuryPercent').val();
+    const signature = 'setTreasuryPercent(uint256)';
+    const params = [setInvestorPercent];
+    const data = encodeParameters(['uint256'], params);
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#setTreasuryPercent_out_queue').val( queue.encodeABI() );
+    $('#setTreasuryPercent_out_run').val( run.encodeABI() );
+}
+
+async function setDevPercent(){
+    const master = $('#master').val();
+
+    const eta = $('#timestamp').val();
+    const setInvestorPercent = $('#setDevPercent').val();
+    const signature = 'setDevPercent(uint256)';
+    const params = [setInvestorPercent];
+    const data = encodeParameters(['uint256'], params);
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#setDevPercent_out_queue').val( queue.encodeABI() );
+    $('#setDevPercent_out_run').val( run.encodeABI() );
+}
+
+// setDevFeeStage(uint256[] memory _devFees)
+// setUserFeeStage(uint256[] memory _userFees)
+// setStageEnds(uint256[] memory _blockEnds)
+// setStageStarts(uint256[] memory _blockStarts)
+// (uint256 _newDevPercent)
