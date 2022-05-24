@@ -717,3 +717,302 @@ async function setStageStarts(){
     $('#setStageStarts_out_run').val( run.encodeABI() );
 }
 
+async function HermesToken_burn(){
+    const master = $('#HermesToken').val();
+    const eta = $('#timestamp').val();
+
+    const account = $('#HermesToken_burn_account').val();
+    const amount = $('#HermesToken_burn_amount').val();
+    const signature = 'burn(address,uint256)';
+    const params = [account,amount];
+    const data = encodeParameters(['address','uint256'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#HermesToken_burn_out_queue').val( queue.encodeABI() );
+    $('#HermesToken_burn_out_run').val( run.encodeABI() );
+}
+
+async function HermesToken_mint(){
+    const master = $('#HermesToken').val();
+    const eta = $('#timestamp').val();
+
+    const account = $('#HermesToken_mint_account').val();
+    const amount = $('#HermesToken_mint_amount').val();
+    const signature = 'mint(address,uint256)';
+    const params = [account,amount];
+    const data = encodeParameters(['address','uint256'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#HermesToken_mint_out_queue').val( queue.encodeABI() );
+    $('#HermesToken_mint_out_run').val( run.encodeABI() );
+}
+
+async function HermesToken_grantMinterRole(){
+    const master = $('#HermesToken').val();
+    const eta = $('#timestamp').val();
+
+    const account = $('#HermesToken_grantMinterRole_account').val();
+    const signature = 'grantMinterRole(address)';
+    const params = [account];
+    const data = encodeParameters(['address'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#HermesToken_grantMinterRole_out_queue').val( queue.encodeABI() );
+    $('#HermesToken_grantMinterRole_out_run').val( run.encodeABI() );
+}
+
+async function HermesToken_grantBurnerRole(){
+    const master = $('#HermesToken').val();
+    const eta = $('#timestamp').val();
+
+    const account = $('#HermesToken_grantBurnerRole_account').val();
+    const signature = 'grantBurnerRole(address)';
+    const params = [account];
+    const data = encodeParameters(['address'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#HermesToken_grantBurnerRole_out_queue').val( queue.encodeABI() );
+    $('#HermesToken_grantBurnerRole_out_run').val( run.encodeABI() );
+}
+
+async function HermesToken_revokeMinterRole(){
+    const master = $('#HermesToken').val();
+    const eta = $('#timestamp').val();
+
+    const account = $('#HermesToken_revokeMinterRole_account').val();
+    const signature = 'revokeMinterRole(address)';
+    const params = [account];
+    const data = encodeParameters(['address'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#HermesToken_revokeMinterRole_out_queue').val( queue.encodeABI() );
+    $('#HermesToken_revokeMinterRole_out_run').val( run.encodeABI() );
+}
+
+async function HermesToken_revokeBurnerRole(){
+    const master = $('#HermesToken').val();
+    const eta = $('#timestamp').val();
+
+    const account = $('#HermesToken_revokeBurnerRole_account').val();
+    const signature = 'revokeBurnerRole(address)';
+    const params = [account];
+    const data = encodeParameters(['address'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#HermesToken_revokeBurnerRole_out_queue').val( queue.encodeABI() );
+    $('#HermesToken_revokeBurnerRole_out_run').val( run.encodeABI() );
+}
+
+async function HermesToken_transferOwnership(){
+    const master = $('#HermesToken').val();
+    const eta = $('#timestamp').val();
+
+    const account = $('#HermesToken_transferOwnership_newOwner').val();
+    const signature = 'transferOwnership(address)';
+    const params = [account];
+    const data = encodeParameters(['address'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#HermesToken_transferOwnership_out_queue').val( queue.encodeABI() );
+    $('#HermesToken_transferOwnership_out_run').val( run.encodeABI() );
+}
+
+async function setRewardRate(){
+    const master = $('#SimpleRewarderPerSec').val();
+    const eta = $('#timestamp').val();
+
+    const val = $('#setRewardRate_tokenPerSec').val();
+    const signature = 'setRewardRate(uint256)';
+    const params = [val];
+    const data = encodeParameters(['uint256'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#setRewardRate_out_queue').val( queue.encodeABI() );
+    $('#setRewardRate_out_run').val( run.encodeABI() );
+}
+
+async function Distributor_setCaller(){
+    const master = $('#Distributor').val();
+    const eta = $('#timestamp').val();
+
+    const caller = $('#setRewardRate_caller').val();
+    const status = $('#setRewardRate_status').is(":checked");
+    const signature = 'setCaller(address,bool)';
+    const params = [caller,status];
+    const data = encodeParameters(['address','bool'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#Distributor_setCaller_out_queue').val( queue.encodeABI() );
+    $('#Distributor_setCaller_out_run').val( run.encodeABI() );
+}
+
+async function Distributor_pairRemove(){
+    const master = $('#Distributor').val();
+    const eta = $('#timestamp').val();
+
+    const val = $('#pairRemove_pair').val();
+    const signature = 'pairRemove(address)';
+    const params = [val];
+    const data = encodeParameters(['address'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#Distributor_setCaller_out_queue').val( queue.encodeABI() );
+    $('#Distributor_setCaller_out_run').val( run.encodeABI() );
+}
+
+async function Distributor_addNewToken(){
+    const master = $('#Distributor').val();
+    const eta = $('#timestamp').val();
+
+    const token = $('#addNewToken_token').val();
+    const xHRMSPath_a = $('#addNewToken_xHRMSPath_a').val();
+    const xHRMSPath_b = $('#addNewToken_xHRMSPath_b').val();
+    const sHRMSPath_a = $('#addNewToken_xHRMSPath_a').val();
+    const sHRMSPath_b = $('#addNewToken_xHRMSPath_a').val();
+    const signature = 'addNewToken(address,uint256[],uint256[])';
+    const params = [token,[xHRMSPath_a,xHRMSPath_b],[sHRMSPath_a,sHRMSPath_b]];
+    const data = encodeParameters(['address','uint256[]','uint256[]'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#Distributor_addNewToken_out_queue').val( queue.encodeABI() );
+    $('#Distributor_addNewToken_out_run').val( run.encodeABI() );
+}
+
+async function Distributor_setToken(){
+    const master = $('#Distributor').val();
+    const eta = $('#timestamp').val();
+
+    const token = $('#addNewToken_token').val();
+    const xHRMSPath_a = $('#addNewToken_sHRMSPath_a').val();
+    const xHRMSPath_b = $('#addNewToken_sHRMSPath_b').val();
+    const sHRMSPath_a = $('#addNewToken_sHRMSPath_a').val();
+    const sHRMSPath_b = $('#addNewToken_sHRMSPath_a').val();
+    const signature = 'setToken(address,uint256[],uint256[])';
+    const params = [token,[xHRMSPath_a,xHRMSPath_b],[sHRMSPath_a,sHRMSPath_b]];
+    const data = encodeParameters(['address','uint256[]','uint256[]'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#Distributor_setToken_out_queue').val( queue.encodeABI() );
+    $('#Distributor_setToken_out_run').val( run.encodeABI() );
+}
+
+async function StableHermesStaking_addRewardToken(){
+    const master = $('#StableHermesStaking').val();
+    const eta = $('#timestamp').val();
+
+    const val = $('#addRewardToken_rewardToken').val();
+    const signature = 'addRewardToken(address)';
+    const params = [val];
+    const data = encodeParameters(['address'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#addRewardToken_out_queue').val( queue.encodeABI() );
+    $('#addRewardToken_out_run').val( run.encodeABI() );
+}
+
+async function StableHermesStaking_removeRewardToken(){
+    const master = $('#StableHermesStaking').val();
+    const eta = $('#timestamp').val();
+
+    const val = $('#removeRewardToken_rewardToken').val();
+    const signature = 'removeRewardToken(address)';
+    const params = [val];
+    const data = encodeParameters(['address'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#removeRewardToken_out_queue').val( queue.encodeABI() );
+    $('#removeRewardToken_out_run').val( run.encodeABI() );
+}
+
+async function StableHermesStaking_setDepositFeePercent(){
+    const master = $('#StableHermesStaking').val();
+    const eta = $('#timestamp').val();
+
+    const val = $('#setDepositFeePercent_depositFeePercent').val();
+    const signature = 'setDepositFeePercent(uint256)';
+    const params = [val];
+    const data = encodeParameters(['uint256'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#removeRewardToken_out_queue').val( queue.encodeABI() );
+    $('#removeRewardToken_out_run').val( run.encodeABI() );
+}
+
+async function setFeeTo(){
+    const master = $('#HermesFactory').val();
+    const eta = $('#timestamp').val();
+
+    const val = $('#setFeeTo_feeTo').val();
+    const signature = 'setFeeTo(address)';
+    const params = [val];
+    const data = encodeParameters(['address'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#setFeeTo_out_queue').val( queue.encodeABI() );
+    $('#setFeeTo_out_run').val( run.encodeABI() );
+}
+
+async function setFeeToSetter(){
+    const master = $('#HermesFactory').val();
+    const eta = $('#timestamp').val();
+
+    const val = $('#setFeeTo_feeTo').val();
+    const signature = 'setFeeToSetter_feeToSetter(address)';
+    const params = [val];
+    const data = encodeParameters(['address'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+
+    $('#setFeeToSetter_out_queue').val( queue.encodeABI() );
+    $('#setFeeToSetter_out_run').val( run.encodeABI() );
+}

@@ -12,197 +12,427 @@
     <script type="text/javascript"
             src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.6/ethers.umd.min.js" integrity="sha512-za1vwN3yPBeFCjsPWyMfeHAUByvIaYevZRF81oV/kUv6D9bqZEwppA2aDsHD2vmrIf+aQrhGHt+g5+AG7EDjng==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.6/ethers.umd.min.js"
+            integrity="sha512-za1vwN3yPBeFCjsPWyMfeHAUByvIaYevZRF81oV/kUv6D9bqZEwppA2aDsHD2vmrIf+aQrhGHt+g5+AG7EDjng=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="index.js"></script>
 
 </head>
 
 <body onload="onLoad()">
 
-<span id="WALLET"></span>
-- masterchef: <input type="text" id="master" value="0x78B3Ec25D285F7a9EcA8Da8eb6b20Be4d5D70E84"/>
-timestamp: <input type="text" id="timestamp" class="timestamp" value=""/>
+    Wallet: <span id="WALLET"></span> - timestamp: <input type="text" id="timestamp" class="timestamp" value=""/>
 
-<fieldset>
-    <legend>add</legend>
-    lp addr: <input value="" type="text" id="lp" size="30"/>
-    points: <input value="" type="number" id="alloc" style="width: 100px"/>
-    rewarder: <input value="0x0000000000000000000000000000000000000000" type="text" id="rewarder" size="30"/>
+    <h1>Masterchef</h1>
+    Contract: <input type="text" id="master" value="0x78B3Ec25D285F7a9EcA8Da8eb6b20Be4d5D70E84"/>
 
-    <br/>
-    <input type="button" value="Ok" onclick="add_lp()"/>
+    <fieldset>
+        <legend>add</legend>
+        lp addr: <input value="" type="text" id="lp" size="30"/>
+        points: <input value="" type="number" id="alloc" style="width: 100px"/>
+        rewarder: <input value="0x0000000000000000000000000000000000000000" type="text" id="rewarder" size="30"/>
+
+        <br/>
+        <input type="button" value="Ok" onclick="add_lp()"/>
+
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="add_out_queue"></textarea>
+        <br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="add_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>set</legend>
+        pid: <input value="" type="number" id="set_pid" style="width: 50px"/>
+        points: <input value="" type="number" id="set_alloc" style="width: 50px"/>
+        rewarder: <input value="0x0000000000000000000000000000000000000000" type="text" id="set_rewarder" size="30"/>
+        overwrite? <input type="checkbox" id="set_overwrite"/>
+        <br/>
+        <input type="button" value="Ok" onclick="set_lp()"/>
+
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="set_out_queue"></textarea>
+        <br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="set_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>updateEmissionRate</legend>
+        timestamp: <input type="text" id="updateEmissionRate_timestamp" class="timestamp" value=""/>
+        hermesPerSec (in decimal): <input value="" type="text" id="hermesPerSec"/>
+        <br/>
+        <input type="button" value="Ok" onclick="updateEmissionRate()"/>
+
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="updateEmissionRate_out_queue"></textarea>
+        <br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="updateEmissionRate_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>setInvestorPercent</legend>
+
+        setInvestorPercent: <input value="" type="text" id="setInvestorPercent"/>
+        <br/>
+        <input type="button" value="Ok" onclick="setInvestorPercent()"/>
+
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setInvestorPercent_out_queue"></textarea>
+        <br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setInvestorPercent_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>setInvestorAddr</legend>
+
+        _investorAddr: <input value="" type="text" id="setInvestorAddr"/>
+        <br/>
+        <input type="button" value="Ok" onclick="setInvestorAddr()"/>
+
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setInvestorAddr_out_queue"></textarea>
+        <br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setInvestorAddr_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>setTreasuryPercent</legend>
+
+        %: <input value="" type="text" id="setTreasuryPercent"/>
+        <br/>
+        <input type="button" value="Ok" onclick="setTreasuryPercent()"/>
+
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setTreasuryPercent_out_queue"></textarea>
+        <br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setTreasuryPercent_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>setDevPercent</legend>
+
+        %: <input value="" type="text" id="setDevPercent"/>
+        <br/>
+        <input type="button" value="Ok" onclick="setDevPercent()"/>
+
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setDevPercent_out_queue"></textarea>
+        <br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setDevPercent_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>setDevFeeStage</legend>
+
+        1: <input value="" type="text" id="setDevFeeStage1"/>
+        2: <input value="" type="text" id="setDevFeeStage2"/>
+        3: <input value="" type="text" id="setDevFeeStage3"/>
+        <br/>
+        <input type="button" value="Ok" onclick="setDevFeeStage()"/>
+
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setDevFeeStage_out_queue"></textarea>
+        <br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setDevFeeStage_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>setUserFeeStage</legend>
+
+        1: <input value="" type="text" id="setUserFeeStage1"/>
+        2: <input value="" type="text" id="setUserFeeStage2"/>
+        3: <input value="" type="text" id="setUserFeeStage3"/>
+        <br/>
+        <input type="button" value="Ok" onclick="setUserFeeStage()"/>
+
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setUserFeeStage_out_queue"></textarea>
+        <br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setUserFeeStage_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>setStageEnds</legend>
+
+        1: <input value="" type="text" id="setStageEnds1"/>
+        2: <input value="" type="text" id="setStageEnds2"/>
+        3: <input value="" type="text" id="setStageEnds3"/>
+        <br/>
+        <input type="button" value="Ok" onclick="setStageEnds()"/>
+
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setStageEnds_out_queue"></textarea>
+        <br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setStageEnds_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>setStageStarts</legend>
+
+        1: <input value="" type="text" id="setStageStarts1"/>
+        2: <input value="" type="text" id="setStageStarts2"/>
+        3: <input value="" type="text" id="setStageStarts3"/>
+        <br/>
+        <input type="button" value="Ok" onclick="setStageStarts()"/>
+
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setStageStarts_out_queue"></textarea>
+        <br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setStageStarts_out_run"></textarea>
+    </fieldset>
+
+    <h1>HermesToken</h1>
+
+    contract: <input value="" type="text" id="HermesToken"/>
+
+
+    <fieldset>
+        <legend>burn(address _account, uint256 amount)</legend>
+        _account: <input value="" type="text" id="HermesToken_burn_account"/>
+        amount: <input value="" type="text" id="HermesToken_burn_amount"/><br/>
+        <input type="button" value="Ok" onclick="HermesToken_burn()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_burn_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_burn_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>mint(address _account, uint256 _amount)</legend>
+        _account: <input value="" type="text" id="HermesToken_mint_account"/>
+        amount: <input value="" type="text" id="HermesToken_mint_amount"/><br/>
+        <input type="button" value="Ok" onclick="HermesToken_mint()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_mint_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_mint_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>grantMinterRole(address _account)</legend>
+        _account: <input value="" type="text" id="HermesToken_grantMinterRole_account"/>
+        <input type="button" value="Ok" onclick="HermesToken_grantMinterRole()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_grantMinterRole_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_grantMinterRole_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>grantBurnerRole(address _account)</legend>
+        _account: <input value="" type="text" id="HermesToken_grantBurnerRole_account"/>
+        <input type="button" value="Ok" onclick="HermesToken_grantBurnerRole()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_grantBurnerRole_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_grantBurnerRole_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>revokeMinterRole(address _account)</legend>
+        _account: <input value="" type="text" id="HermesToken_revokeMinterRole_account"/>
+        <input type="button" value="Ok" onclick="HermesToken_revokeMinterRole()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_revokeMinterRole_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_revokeMinterRole_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>revokeBurnerRole(address _account)</legend>
+        _account: <input value="" type="text" id="HermesToken_revokeBurnerRole_account"/>
+        <input type="button" value="Ok" onclick="HermesToken_revokeBurnerRole()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_revokeBurnerRole_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_revokeBurnerRole_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>transferOwnership(address newOwner)</legend>
+        newOwner: <input value="" type="text" id="HermesToken_transferOwnership_newOwner"/>
+        <input type="button" value="Ok" onclick="HermesToken_transferOwnership()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_transferOwnership_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="HermesToken_transferOwnership_out_run"></textarea>
+    </fieldset>
+
 
     <hr/>
-    queue:<br/>
-    <textarea cols="100" type="text" id="add_out_queue"></textarea>
-    <br/>
-    run:<br/>
-    <textarea cols="100" type="text" id="add_out_run"></textarea>
-</fieldset>
 
-<fieldset>
-    <legend>set</legend>
-    pid: <input value="" type="number" id="set_pid" style="width: 50px"/>
-    points: <input value="" type="number" id="set_alloc" style="width: 50px"/>
-    rewarder: <input value="0x0000000000000000000000000000000000000000" type="text" id="set_rewarder" size="30"/>
-    overwrite? <input type="checkbox" id="set_overwrite"/>
-    <br/>
-    <input type="button" value="Ok" onclick="set_lp()"/>
+    <h1>SimpleRewarderPerSec</h1>
+    contract <input value="" type="text" id="SimpleRewarderPerSec"/>
 
-    <hr/>
-    queue:<br/>
-    <textarea cols="100" type="text" id="set_out_queue"></textarea>
-    <br/>
-    run:<br/>
-    <textarea cols="100" type="text" id="set_out_run"></textarea>
-</fieldset>
-
-<fieldset>
-    <legend>updateEmissionRate</legend>
-    timestamp: <input type="text" id="updateEmissionRate_timestamp" class="timestamp" value=""/>
-    hermesPerSec (in decimal): <input value="" type="text" id="hermesPerSec" />
-    <br/>
-    <input type="button" value="Ok" onclick="updateEmissionRate()"/>
+    <fieldset>
+        <legend>setRewardRate(uint256 _tokenPerSec)</legend>
+        _tokenPerSec: <input value="" type="text" id="setRewardRate_tokenPerSec"/>
+        <input type="button" value="Ok" onclick="setRewardRate()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setRewardRate_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setRewardRate_out_run"></textarea>
+    </fieldset>
 
     <hr/>
-    queue:<br/>
-    <textarea cols="100" type="text" id="updateEmissionRate_out_queue"></textarea>
-    <br/>
-    run:<br/>
-    <textarea cols="100" type="text" id="updateEmissionRate_out_run"></textarea>
-</fieldset>
 
-<fieldset>
-    <legend>setInvestorPercent</legend>
+    <h1>Distributor</h1>
+    contract: <input value="" type="text" id="Distributor"/>
 
-    setInvestorPercent: <input value="" type="text" id="setInvestorPercent" />
-    <br/>
-    <input type="button" value="Ok" onclick="setInvestorPercent()"/>
+    <fieldset>
+        <legend>setCaller(address caller, bool status)</legend>
+        caller: <input value="" type="text" id="setRewardRate_caller"/>
+        status: <input type="checkbox" id="setRewardRate_status"/>
+        <input type="button" value="Ok" onclick="Distributor_setCaller()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="Distributor_setCaller_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="Distributor_setCaller_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>pairRemove(address pair)</legend>
+        caller: <input value="" type="text" id="pairRemove_pair"/>
+        <input type="button" value="Ok" onclick="Distributor_pairRemove()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="Distributor_pairRemove_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="Distributor_pairRemove_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>addNewToken(address _token, address[] memory _xHRMSPath, address[] memory _sHRMSPath)</legend>
+        token: <input value="" type="text" id="addNewToken_token"/>
+        xHRMSPath[a]: <input value="" type="text" id="addNewToken_xHRMSPath_a"/>
+        xHRMSPath[b]: <input value="" type="text" id="addNewToken_xHRMSPath_b"/>
+        <hr/>
+        sHRMSPath[a]: <input value="" type="text" id="addNewToken_sHRMSPath_a"/>
+        sHRMSPath[b]: <input value="" type="text" id="addNewToken_sHRMSPath_b"/>
+        <input type="button" value="Ok" onclick="Distributor_addNewToken()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="Distributor_addNewToken_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="Distributor_addNewToken_out_run"></textarea>
+    </fieldset>
+
+
+    <fieldset>
+        <legend>setToken(address _token, address[] memory _xHRMSPath, address[] memory _sHRMSPath)</legend>
+        token: <input value="" type="text" id="setToken_token"/>
+        xHRMSPath[a]: <input value="" type="text" id="setToken_xHRMSPath_a"/>
+        xHRMSPath[b]: <input value="" type="text" id="setToken_xHRMSPath_b"/>
+        <hr/>
+        sHRMSPath[a]: <input value="" type="text" id="setToken_sHRMSPath_a"/>
+        sHRMSPath[b]: <input value="" type="text" id="setToken_sHRMSPath_b"/>
+        <input type="button" value="Ok" onclick="Distributor_setToken()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="Distributor_setToken_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="Distributor_setToken_out_run"></textarea>
+    </fieldset>
+
 
     <hr/>
-    queue:<br/>
-    <textarea cols="100" type="text" id="setInvestorPercent_out_queue"></textarea>
-    <br/>
-    run:<br/>
-    <textarea cols="100" type="text" id="setInvestorPercent_out_run"></textarea>
-</fieldset>
 
-<fieldset>
-    <legend>setInvestorAddr</legend>
+    <h1>StableHermesStaking</h1>
+    contract: <input value="" type="text" id="StableHermesStaking"/>
 
-    _investorAddr: <input value="" type="text" id="setInvestorAddr" />
-    <br/>
-    <input type="button" value="Ok" onclick="setInvestorAddr()"/>
+    <fieldset>
+        <legend>addRewardToken(IERC20 _rewardToken)</legend>
+        _rewardToken: <input value="" type="text" id="addRewardToken_rewardToken"/>
+        <input type="button" value="Ok" onclick="StableHermesStaking_addRewardToken()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="addRewardToken_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="addRewardToken_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>removeRewardToken(IERC20 _rewardToken)</legend>
+        _rewardToken: <input value="" type="text" id="removeRewardToken_rewardToken"/>
+        <input type="button" value="Ok" onclick="StableHermesStaking_removeRewardToken()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="removeRewardToken_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="removeRewardToken_out_run"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>setDepositFeePercent(uint256 _depositFeePercent)</legend>
+        _depositFeePercent: <input value="" type="text" id="setDepositFeePercent_depositFeePercent"/>
+        <input type="button" value="Ok" onclick="StableHermesStaking_setDepositFeePercent()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setDepositFeePercent_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setDepositFeePercent_out_run"></textarea>
+    </fieldset>
+
 
     <hr/>
-    queue:<br/>
-    <textarea cols="100" type="text" id="setInvestorAddr_out_queue"></textarea>
-    <br/>
-    run:<br/>
-    <textarea cols="100" type="text" id="setInvestorAddr_out_run"></textarea>
-</fieldset>
 
-<fieldset>
-    <legend>setTreasuryPercent</legend>
+    <h1>HermesFactory</h1>
+    contract: <input value="" type="text" id="HermesFactory"/>
 
-    %: <input value="" type="text" id="setTreasuryPercent" />
-    <br/>
-    <input type="button" value="Ok" onclick="setTreasuryPercent()"/>
+    <fieldset>
+        <legend>setFeeTo(address _feeTo)</legend>
+        _feeTo: <input value="" type="text" id="setFeeTo_feeTo"/>
+        <input type="button" value="Ok" onclick="setFeeTo()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setFeeTo_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setFeeTo_out_run"></textarea>
+    </fieldset>
 
-    <hr/>
-    queue:<br/>
-    <textarea cols="100" type="text" id="setTreasuryPercent_out_queue"></textarea>
-    <br/>
-    run:<br/>
-    <textarea cols="100" type="text" id="setTreasuryPercent_out_run"></textarea>
-</fieldset>
-
-<fieldset>
-    <legend>setDevPercent</legend>
-
-    %: <input value="" type="text" id="setDevPercent" />
-    <br/>
-    <input type="button" value="Ok" onclick="setDevPercent()"/>
-
-    <hr/>
-    queue:<br/>
-    <textarea cols="100" type="text" id="setDevPercent_out_queue"></textarea>
-    <br/>
-    run:<br/>
-    <textarea cols="100" type="text" id="setDevPercent_out_run"></textarea>
-</fieldset>
-
-<fieldset>
-    <legend>setDevFeeStage</legend>
-
-    1: <input value="" type="text" id="setDevFeeStage1" />
-    2: <input value="" type="text" id="setDevFeeStage2" />
-    3: <input value="" type="text" id="setDevFeeStage3" />
-    <br/>
-    <input type="button" value="Ok" onclick="setDevFeeStage()"/>
-
-    <hr/>
-    queue:<br/>
-    <textarea cols="100" type="text" id="setDevFeeStage_out_queue"></textarea>
-    <br/>
-    run:<br/>
-    <textarea cols="100" type="text" id="setDevFeeStage_out_run"></textarea>
-</fieldset>
-
-
-<fieldset>
-    <legend>setUserFeeStage</legend>
-
-    1: <input value="" type="text" id="setUserFeeStage1" />
-    2: <input value="" type="text" id="setUserFeeStage2" />
-    3: <input value="" type="text" id="setUserFeeStage3" />
-    <br/>
-    <input type="button" value="Ok" onclick="setUserFeeStage()"/>
-
-    <hr/>
-    queue:<br/>
-    <textarea cols="100" type="text" id="setUserFeeStage_out_queue"></textarea>
-    <br/>
-    run:<br/>
-    <textarea cols="100" type="text" id="setUserFeeStage_out_run"></textarea>
-</fieldset>
-
-
-<fieldset>
-    <legend>setStageEnds</legend>
-
-    1: <input value="" type="text" id="setStageEnds1" />
-    2: <input value="" type="text" id="setStageEnds2" />
-    3: <input value="" type="text" id="setStageEnds3" />
-    <br/>
-    <input type="button" value="Ok" onclick="setStageEnds()"/>
-
-    <hr/>
-    queue:<br/>
-    <textarea cols="100" type="text" id="setStageEnds_out_queue"></textarea>
-    <br/>
-    run:<br/>
-    <textarea cols="100" type="text" id="setStageEnds_out_run"></textarea>
-</fieldset>
-
-
-<fieldset>
-    <legend>setStageStarts</legend>
-
-    1: <input value="" type="text" id="setStageStarts1" />
-    2: <input value="" type="text" id="setStageStarts2" />
-    3: <input value="" type="text" id="setStageStarts3" />
-    <br/>
-    <input type="button" value="Ok" onclick="setStageStarts()"/>
-
-    <hr/>
-    queue:<br/>
-    <textarea cols="100" type="text" id="setStageStarts_out_queue"></textarea>
-    <br/>
-    run:<br/>
-    <textarea cols="100" type="text" id="setStageStarts_out_run"></textarea>
-</fieldset>
-
+    <fieldset>
+        <legend>setFeeToSetter(address _feeToSetter)</legend>
+        _feeToSetter: <input value="" type="text" id="setFeeToSetter_feeToSetter"/>
+        <input type="button" value="Ok" onclick="setFeeToSetter()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" id="setFeeToSetter_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" id="setFeeToSetter_out_run"></textarea>
+    </fieldset>
+    -
+</div>
 </body>
 </html>
 
