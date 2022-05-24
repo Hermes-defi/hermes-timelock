@@ -886,8 +886,8 @@ async function Distributor_pairRemove(){
     const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
     const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
 
-    $('#Distributor_setCaller_out_queue').val( queue.encodeABI() );
-    $('#Distributor_setCaller_out_run').val( run.encodeABI() );
+    $('#Distributor_pairRemove_out_queue').val( queue.encodeABI() );
+    $('#Distributor_pairRemove_out_run').val( run.encodeABI() );
 }
 
 async function Distributor_addNewToken(){
@@ -979,8 +979,8 @@ async function StableHermesStaking_setDepositFeePercent(){
     const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
     const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
 
-    $('#removeRewardToken_out_queue').val( queue.encodeABI() );
-    $('#removeRewardToken_out_run').val( run.encodeABI() );
+    $('#setDepositFeePercent_out_queue').val( queue.encodeABI() );
+    $('#setDepositFeePercent_out_run').val( run.encodeABI() );
 }
 
 async function setFeeTo(){
