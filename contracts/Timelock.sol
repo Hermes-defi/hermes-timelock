@@ -186,7 +186,7 @@ contract Timelock {
     uint public constant MINIMUM_DELAY = 12 hours;
     uint public constant MAXIMUM_DELAY = 30 days;
 
-    address public admin = address(0x7cef2432A2690168Fb8eb7118A74d5f8EfF9Ef55);
+    address public admin = address(0x208CD487216F7ABab3142d972803547fB86ba7Ee);
     address public pendingAdmin;
     uint public delay;
     bool public admin_initialized;
@@ -195,7 +195,7 @@ contract Timelock {
 
 
     constructor() public {
-        delay = MINIMUM_DELAY;
+        delay = 24 hours;
         admin_initialized = false;
     }
 

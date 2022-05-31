@@ -318,7 +318,7 @@ const abi = [
                 "type": "uint256"
             }
         ],
-        "name": "executeTransaction",
+        "name": "queueTransaction",
         "outputs": [
             {
                 "internalType": "bytes",
@@ -370,7 +370,7 @@ const abi = [
                 "type": "uint256"
             }
         ],
-        "name": "queueTransaction",
+        "name": "executeTransaction",
         "outputs": [
             {
                 "internalType": "bytes32",
@@ -510,7 +510,7 @@ async function load(provider) {
         $('#WALLET').html('wallet: ...'+account.substr(account.length - 5));
         timelock = new web3.eth.Contract(abi,'0x3d9f5f87ef9abe7e0c985c48e66f3e3b863450e2');
 
-        const ts = get_interval(12);
+        const ts = get_interval(1);
         $('.timestamp').val(ts);
 
     } else {
@@ -537,8 +537,8 @@ async function add_lp(){
     const params = [points, lp, rewarder];
     const data = encodeParameters(['uint256', 'address', 'address'], params);
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#add_out_queue').val( queue.encodeABI() );
     $('#add_out_run').val( run.encodeABI() );
@@ -557,8 +557,8 @@ async function set_lp(){
     const params = [pid, points, rewarder, overwrite];
     const data = encodeParameters(['uint256', 'uint256', 'address', 'bool'], params);
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#set_out_queue').val( queue.encodeABI() );
     $('#set_out_run').val( run.encodeABI() );
@@ -574,8 +574,8 @@ async function updateEmissionRate(){
     const params = [hermesPerSec];
     const data = encodeParameters(['uint256'], params);
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#updateEmissionRate_out_queue').val( queue.encodeABI() );
     $('#updateEmissionRate_out_run').val( run.encodeABI() );
@@ -590,8 +590,8 @@ async function setInvestorPercent(){
     const params = [setInvestorPercent];
     const data = encodeParameters(['uint256'], params);
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setInvestorPercent_out_queue').val( queue.encodeABI() );
     $('#setInvestorPercent_out_run').val( run.encodeABI() );
@@ -606,8 +606,8 @@ async function setInvestorAddr(){
     const params = [setInvestorPercent];
     const data = encodeParameters(['address'], params);
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setInvestorAddr_out_queue').val( queue.encodeABI() );
     $('#setInvestorAddr_out_run').val( run.encodeABI() );
@@ -622,8 +622,8 @@ async function setTreasuryPercent(){
     const params = [setInvestorPercent];
     const data = encodeParameters(['uint256'], params);
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setTreasuryPercent_out_queue').val( queue.encodeABI() );
     $('#setTreasuryPercent_out_run').val( run.encodeABI() );
@@ -638,8 +638,8 @@ async function setDevPercent(){
     const params = [setInvestorPercent];
     const data = encodeParameters(['uint256'], params);
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setDevPercent_out_queue').val( queue.encodeABI() );
     $('#setDevPercent_out_run').val( run.encodeABI() );
@@ -656,8 +656,8 @@ async function setDevFeeStage(){
     const params = [[setDevFeeStage1,setDevFeeStage2,setDevFeeStage3]];
     const data = encodeParameters(['uint256[]'], params);
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setDevFeeStage_out_queue').val( queue.encodeABI() );
     $('#setDevFeeStage_out_run').val( run.encodeABI() );
@@ -674,8 +674,8 @@ async function setUserFeeStage(){
     const params = [[setUserFeeStage1,setUserFeeStage2,setUserFeeStage3]];
     const data = encodeParameters(['uint256[]'], params);
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setUserFeeStage_out_queue').val( queue.encodeABI() );
     $('#setUserFeeStage_out_run').val( run.encodeABI() );
@@ -692,8 +692,8 @@ async function setStageEnds(){
     const params = [[a1,b2,c3]];
     const data = encodeParameters(['uint256[]'], params);
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setUserFeeStage_out_queue').val( queue.encodeABI() );
     $('#setUserFeeStage_out_run').val( run.encodeABI() );
@@ -710,8 +710,8 @@ async function setStageStarts(){
     const params = [[a1,b2,c3]];
     const data = encodeParameters(['uint256[]'], params);
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setStageStarts_out_queue').val( queue.encodeABI() );
     $('#setStageStarts_out_run').val( run.encodeABI() );
@@ -728,8 +728,8 @@ async function HermesToken_burn(){
     const data = encodeParameters(['address','uint256'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#HermesToken_burn_out_queue').val( queue.encodeABI() );
     $('#HermesToken_burn_out_run').val( run.encodeABI() );
@@ -746,8 +746,8 @@ async function HermesToken_mint(){
     const data = encodeParameters(['address','uint256'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#HermesToken_mint_out_queue').val( queue.encodeABI() );
     $('#HermesToken_mint_out_run').val( run.encodeABI() );
@@ -763,8 +763,8 @@ async function HermesToken_grantMinterRole(){
     const data = encodeParameters(['address'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#HermesToken_grantMinterRole_out_queue').val( queue.encodeABI() );
     $('#HermesToken_grantMinterRole_out_run').val( run.encodeABI() );
@@ -780,8 +780,8 @@ async function HermesToken_grantBurnerRole(){
     const data = encodeParameters(['address'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#HermesToken_grantBurnerRole_out_queue').val( queue.encodeABI() );
     $('#HermesToken_grantBurnerRole_out_run').val( run.encodeABI() );
@@ -797,8 +797,8 @@ async function HermesToken_revokeMinterRole(){
     const data = encodeParameters(['address'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#HermesToken_revokeMinterRole_out_queue').val( queue.encodeABI() );
     $('#HermesToken_revokeMinterRole_out_run').val( run.encodeABI() );
@@ -814,8 +814,8 @@ async function HermesToken_revokeBurnerRole(){
     const data = encodeParameters(['address'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#HermesToken_revokeBurnerRole_out_queue').val( queue.encodeABI() );
     $('#HermesToken_revokeBurnerRole_out_run').val( run.encodeABI() );
@@ -831,8 +831,8 @@ async function HermesToken_transferOwnership(){
     const data = encodeParameters(['address'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#HermesToken_transferOwnership_out_queue').val( queue.encodeABI() );
     $('#HermesToken_transferOwnership_out_run').val( run.encodeABI() );
@@ -848,8 +848,8 @@ async function setRewardRate(){
     const data = encodeParameters(['uint256'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setRewardRate_out_queue').val( queue.encodeABI() );
     $('#setRewardRate_out_run').val( run.encodeABI() );
@@ -866,8 +866,8 @@ async function Distributor_setCaller(){
     const data = encodeParameters(['address','bool'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#Distributor_setCaller_out_queue').val( queue.encodeABI() );
     $('#Distributor_setCaller_out_run').val( run.encodeABI() );
@@ -883,8 +883,8 @@ async function Distributor_pairRemove(){
     const data = encodeParameters(['address'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#Distributor_pairRemove_out_queue').val( queue.encodeABI() );
     $('#Distributor_pairRemove_out_run').val( run.encodeABI() );
@@ -904,8 +904,8 @@ async function Distributor_addNewToken(){
     const data = encodeParameters(['address','uint256[]','uint256[]'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#Distributor_addNewToken_out_queue').val( queue.encodeABI() );
     $('#Distributor_addNewToken_out_run').val( run.encodeABI() );
@@ -925,8 +925,8 @@ async function Distributor_setToken(){
     const data = encodeParameters(['address','uint256[]','uint256[]'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#Distributor_setToken_out_queue').val( queue.encodeABI() );
     $('#Distributor_setToken_out_run').val( run.encodeABI() );
@@ -942,8 +942,8 @@ async function StableHermesStaking_addRewardToken(){
     const data = encodeParameters(['address'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#addRewardToken_out_queue').val( queue.encodeABI() );
     $('#addRewardToken_out_run').val( run.encodeABI() );
@@ -959,8 +959,8 @@ async function StableHermesStaking_removeRewardToken(){
     const data = encodeParameters(['address'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#removeRewardToken_out_queue').val( queue.encodeABI() );
     $('#removeRewardToken_out_run').val( run.encodeABI() );
@@ -976,8 +976,8 @@ async function StableHermesStaking_setDepositFeePercent(){
     const data = encodeParameters(['uint256'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setDepositFeePercent_out_queue').val( queue.encodeABI() );
     $('#setDepositFeePercent_out_run').val( run.encodeABI() );
@@ -993,8 +993,8 @@ async function setFeeTo(){
     const data = encodeParameters(['address'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setFeeTo_out_queue').val( queue.encodeABI() );
     $('#setFeeTo_out_run').val( run.encodeABI() );
@@ -1010,8 +1010,8 @@ async function setFeeToSetter(){
     const data = encodeParameters(['address'], params);
 
     const value = 0;
-    const queue = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
 
     $('#setFeeToSetter_out_queue').val( queue.encodeABI() );
     $('#setFeeToSetter_out_run').val( run.encodeABI() );
