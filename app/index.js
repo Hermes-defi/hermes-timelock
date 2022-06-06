@@ -528,18 +528,17 @@ function get_interval(hours) {
 }
 
 async function add_lp(){
-    const eta = $('#add_timestamp').val();
+    const eta = $('#timestamp').val().toString();
     const master = $('#master').val();
     const lp = $('#lp').val();
-    const points = $('#alloc').val();
+    const points = $('#alloc').val().toString();
     const rewarder = $('#rewarder').val();
     const signature = 'add(uint256,address,address)';
     const params = [points, lp, rewarder];
     const data = encodeParameters(['uint256', 'address', 'address'], params);
     const value = 0;
-    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
-    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
-
+    const queue = (await timelock.methods.queueTransaction(master, value, signature, data, eta));
+    const run = (await timelock.methods.executeTransaction(master, value, signature, data, eta));
     $('#add_out_queue').val( queue.encodeABI() );
     $('#add_out_run').val( run.encodeABI() );
 }
