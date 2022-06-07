@@ -510,7 +510,7 @@ async function load(provider) {
         $('#WALLET').html('wallet: ...'+account.substr(account.length - 5));
         timelock = new web3.eth.Contract(abi,'0x3d9f5f87ef9abe7e0c985c48e66f3e3b863450e2');
 
-        const ts = get_interval(1);
+        const ts = get_interval(25);
         $('.timestamp').val(ts);
 
     } else {
