@@ -204,6 +204,17 @@
         <textarea cols="150" rows=4 type="text" style="width:350px;" id="setStageStarts_out_run"></textarea>
     </fieldset>
 
+    <fieldset>
+        <legend>transferOwnership(address newOwner)</legend>
+        newOwner: <input value="" type="text" style="width:350px;" id="mc_transferOwnership_newOwner"/>
+        <input type="button" value="Ok" onclick="mc_transferOwnership()"/>
+        <hr/>
+        queue:<br/>
+        <textarea cols="150" rows=4 type="text" style="width:350px;" id="mc_transferOwnership_out_queue"></textarea><br/>
+        run:<br/>
+        <textarea cols="150" rows=4 type="text" style="width:350px;" id="mc_transferOwnership_out_run"></textarea>
+    </fieldset>
+
     <h1>HermesToken</h1>
 
     contract: <input value="0xba4476a302f5bc1dc4053cf79106dc43455904a3" type="text" style="width:350px;" id="HermesToken"/>

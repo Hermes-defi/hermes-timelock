@@ -1015,3 +1015,20 @@ async function setFeeToSetter(){
     $('#setFeeToSetter_out_queue').val( queue.encodeABI() );
     $('#setFeeToSetter_out_run').val( run.encodeABI() );
 }
+
+async function mc_transferOwnership(){
+    const master = $('#HermesToken').val();
+    const eta = $('#timestamp').val();
+
+    const account = $('#mc_transferOwnership_newOwner').val();
+    const signature = 'transferOwnership(address)';
+    const params = [account];
+    const data = encodeParameters(['address'], params);
+
+    const value = 0;
+    const queue = await timelock.methods.queueTransaction(master, value, signature, data, eta);
+    const run = await timelock.methods.executeTransaction(master, value, signature, data, eta);
+
+    $('#mc_transferOwnership_out_queue').val( queue.encodeABI() );
+    $('#mc_transferOwnership_out_run').val( run.encodeABI() );
+}
