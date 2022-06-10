@@ -567,8 +567,8 @@ async function updateEmissionRate(){
     const master = $('#master').val();
 
     const eta = $('#timestamp').val();
-    const hermesPerSec = web3.utils.toWei($('#hermesPerSec').val(),'gwei');
-    console.log('hermesPerSec', hermesPerSec);
+    const hermesPerSec = $('#hermesPerSec').val();
+    // const hermesPerSec = web3.utils.toWei($('#hermesPerSec').val(),'gwei');
     const signature = 'updateEmissionRate(uint256)';
     const params = [hermesPerSec];
     const data = encodeParameters(['uint256'], params);
