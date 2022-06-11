@@ -1017,7 +1017,7 @@ async function setFeeToSetter(){
 }
 
 async function mc_transferOwnership(){
-    const master = $('#HermesToken').val();
+    const master = $('#master').val();
     const eta = $('#timestamp').val();
 
     const account = $('#mc_transferOwnership_newOwner').val();
